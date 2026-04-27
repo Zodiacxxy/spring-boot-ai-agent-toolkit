@@ -1,0 +1,46 @@
+# Java
+*.class
+*.jar
+*.war
+*.nar
+target/
+build/
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+.springBeans
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Env
+.env
+.env.local
+*.env
+
+# Testing
+test-output/
+
+# Application
+*.pid
+*.swp
+*.swo
+*~

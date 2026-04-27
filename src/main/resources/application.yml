@@ -1,0 +1,84 @@
+# =============================================================
+# Spring Boot AI Agent Toolkit - Configuration
+# =============================================================
+
+aiagent:
+  # Provider options: openai, anthropic, ollama
+  provider: ollama
+  # Model name (depends on provider)
+  model: gpt-4o
+
+  # --- OpenAI Configuration ---
+  openai-api-key: sk-your-api-key-here
+  openai-base-url: https://api.openai.com/v1
+
+  # --- Anthropic Configuration ---
+  anthropic-api-key: sk-ant-your-api-key-here
+  anthropic-base-url: https://api.anthropic.com/v1
+
+  # --- Ollama Configuration ---
+  ollama-base-url: http://localhost:11434
+
+  # --- Agent Settings ---
+  agent:
+    system-prompt: "You are a helpful AI assistant integrated into a Spring Boot application. You have access to tools, RAG pipelines, and MCP integrations to help answer questions and perform tasks."
+    temperature: 0.7
+    max-tokens: 4096
+    max-tool-calls: 10
+    max-history-messages: 50
+
+  # --- RAG Pipeline ---
+  rag:
+    enabled: true
+    chunk-size: 500
+    chunk-overlap: 50
+    top-k: 5
+    embedding-model: text-embedding-3-small
+    embedding-dimension: 1536
+
+  # --- MCP Server Integration ---
+  # mcp-servers:
+  #   - name: filesystem
+  #     command: npx
+  #     args:
+  #       - -y
+  #       - "@modelcontextprotocol/server-filesystem"
+  #       - /path/to/allowed/directory
+
+# =============================================================
+# Spring Boot Configuration
+# =============================================================
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-boot-ai-agent-toolkit
+
+---
+# Example: OpenAI Configuration
+spring:
+  config:
+    activate:
+      on-profile: openai
+
+aiagent:
+  provider: openai
+  model: gpt-4o
+  openai-api-key: ${OPENAI_API_KEY}
+
+---
+# Example: Local Ollama Configuration
+spring:
+  config:
+    activate:
+      on-profile: local
+
+aiagent:
+  provider: ollama
+  model: llama3.2:latest
+  ollama-base-url: http://localhost:11434
+  rag:
+    embedding-model: all-minilm:latest
+    embedding-dimension: 384
