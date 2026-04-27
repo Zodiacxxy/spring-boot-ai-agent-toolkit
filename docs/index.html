@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot AI Agent Toolkit</title>
+    <meta name="description" content="A production-ready Spring Boot Starter for integrating AI agents, RAG pipelines, and MCP tools into Java applications.">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --heading: #f0f6fc;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --orange: #d29922;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--heading);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        .hero h1 span { color: var(--accent); }
+        .hero p {
+            font-size: 1.2rem;
+            color: #8b949e;
+            max-width: 700px;
+            margin: 1rem auto 2rem;
+        }
+        .badges { margin-bottom: 2rem; }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            margin: 0.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+        .badge.java { border-color: #b07219; color: #e76f00; }
+        .badge.spring { border-color: #6db33f; color: #6db33f; }
+        .badge.ai { border-color: #58a6ff; color: #58a6ff; }
+        .badge.mit { border-color: var(--green); color: var(--green); }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin: 0.5rem;
+        }
+        .btn-primary {
+            background: var(--green);
+            color: #0d1117;
+        }
+        .btn-primary:hover { background: #2ea043; }
+        .btn-secondary {
+            background: var(--card);
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--accent); background: #1c2128; }
+        
+        /* Sections */
+        section { padding: 3rem 0; }
+        section:nth-child(even) { background: var(--card); }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--heading);
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+            color: var(--heading);
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        /* Feature grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        .feature-card:hover { border-color: var(--accent); }
+        .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .feature-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+        .feature-card p { font-size: 0.95rem; color: #8b949e; }
+        
+        /* Code */
+        pre {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        code { font-family: 'SF Mono', 'Fira Code', monospace; }
+        
+        /* BTC section */
+        .btc-section {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #161b22, #1a1f2e);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .btc-section h2 { color: var(--orange); }
+        .btc-address {
+            font-family: 'SF Mono', monospace;
+            font-size: 1.1rem;
+            background: #0d1117;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: var(--orange);
+            display: inline-block;
+            word-break: break-all;
+            margin: 1rem 0;
+            user-select: all;
+        }
+        .btc-qr { margin: 1rem 0; }
+        .btc-note { color: #8b949e; font-size: 0.95rem; }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #484f58;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="badges">
+            <span class="badge java">☕ Java 17+</span>
+            <span class="badge spring">🍃 Spring Boot 3.4</span>
+            <span class="badge ai">🤖 AI Agent</span>
+            <span class="badge mit">📜 MIT</span>
+        </div>
+        <h1>Spring Boot <span>AI Agent</span> Toolkit</h1>
+        <p>A production-ready Spring Boot Starter for integrating AI agents, RAG pipelines, and MCP tools into Java applications.</p>
+        <div>
+            <a href="https://github.com/Zodiacxxy/spring-boot-ai-agent-toolkit" class="btn btn-primary">⭐ GitHub</a>
+            <a href="https://github.com/Zodiacxxy/spring-boot-ai-agent-toolkit/releases" class="btn btn-secondary">📦 Releases</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Features -->
+        <section id="features">
+            <h2>✨ Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Multi-Provider AI</h3>
+                    <p>Unified API for OpenAI (GPT-4, GPT-4o), Anthropic (Claude 3/4), and Ollama (local LLMs).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Tool Calling</h3>
+                    <p>Register Java methods as AI-callable tools with automatic JSON Schema parameter definitions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>RAG Pipeline</h3>
+                    <p>Built-in document chunking, embedding, vector storage, and cosine similarity search.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>MCP Integration</h3>
+                    <p>Connect to any MCP-compatible server for dynamic tool discovery and execution.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Streaming</h3>
+                    <p>Real-time response streaming for both chat and tool-calling scenarios.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Auto-Configuration</h3>
+                    <p>Spring Boot auto-configuration with sensible defaults. Zero XML, minimal YAML.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start -->
+        <section id="quickstart">
+            <h2>🚀 Quick Start</h2>
+            <h3>Add dependency</h3>
+            <pre><code>// build.gradle.kts
+implementation("com.aiagentkit:spring-boot-ai-agent-toolkit:1.0.0")</code></pre>
+            
+            <h3>Configure</h3>
+            <pre><code># application.yml
+aiagent:
+  provider: ollama          # openai, anthropic, or ollama
+  model: llama3.2:latest
+  ollama-base-url: http://localhost:11434</code></pre>
+            
+            <h3>Use it</h3>
+            <pre><code>@RestController
+public class ChatController {
+
+    @Autowired
+    private AiAgent aiAgent;
+
+    @PostMapping("/chat")
+    public String chat(@RequestBody String message) {
+        return aiAgent.chat(message);
+    }
+}</code></pre>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture">
+            <h2>🏗️ Architecture</h2>
+            <pre><code>┌─────────────────────────────────────────────┐
+│           Your Spring Boot App               │
+├─────────────────────────────────────────────┤
+│  AiAgent (Orchestrator)                      │
+│  ├── AiProvider (OpenAI / Anthropic / Ollama) │
+│  ├── ToolExecutor[] (Your Java Tools)        │
+│  ├── RagPipeline (Embed → Store → Retrieve)   │
+│  └── McpIntegration (MCP Server Connection)  │
+└─────────────────────────────────────────────┘</code></pre>
+        </section>
+
+        <!-- BTC Sponsorship -->
+        <section id="support">
+            <div class="btc-section">
+                <h2>☕ Support This Project</h2>
+                <p style="color: #8b949e; margin-bottom: 1rem;">
+                    If this toolkit saves you time or helps your project, consider supporting its development:
+                </p>
+                <div class="btc-address">1Fxs7ZyZmEGsM39Xd1RqvP389m2xGXpPNc</div>
+                <p class="btc-note">
+                    🙏 Bitcoin (BTC) donations help maintain and improve this project.
+                    <br>100% of donations go toward development and infrastructure.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Spring Boot AI Agent Toolkit &mdash; MIT License &mdash; Built with ❤️ for the Java &amp; AI community</p>
+    </footer>
+</body>
+</html>
